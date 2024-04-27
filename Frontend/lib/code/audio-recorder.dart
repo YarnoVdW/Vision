@@ -103,10 +103,7 @@ class _RecorderState extends State<Recorder>
     });
 
     WidgetsBinding.instance.addObserver(this);
-
   }
-
-
 
   Future<RecognitionConfig> _getConfig() async {
     final String languageCode = await getLanguageCodeFromSharedPreferences();
@@ -123,7 +120,7 @@ class _RecorderState extends State<Recorder>
   Future<void> _start() async {
     try {
       final serviceAccount = ServiceAccount.fromString(
-        await rootBundle.loadString('assets/vision-413509-986cb9620198.json'),
+        await rootBundle.loadString(/*API_KEY_HERE*/),
       );
       final speechToText = SpeechToText.viaServiceAccount(serviceAccount);
       final config = await _getConfig();
@@ -349,7 +346,8 @@ class _RecorderState extends State<Recorder>
           OnboardingWidget(
             title: 'Oops!',
             image: 'assets/images/btfail.jpg',
-            description: 'Something went wrong when trying to start VisionX.\n\nPlease restart the VisionX device.',
+            description:
+                'Something went wrong when trying to start VisionX.\n\nPlease restart the VisionX device.',
             button: retryButton,
           ),
         ],
@@ -362,15 +360,14 @@ class _RecorderState extends State<Recorder>
           OnboardingWidget(
             title: 'VisionX Device Not Connected',
             image: 'assets/images/btfail.jpg',
-            description: 'The VisionX device is not yet connected via Bluetooth.\n\nTap the button below to access your device\'s Bluetooth settings and connect to VisionX.',
+            description:
+                'The VisionX device is not yet connected via Bluetooth.\n\nTap the button below to access your device\'s Bluetooth settings and connect to VisionX.',
             button: connButton,
           ),
         ],
       );
     }
   }
-
-
 
   Widget _buildRecorderWidget() {
     return Stack(
